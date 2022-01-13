@@ -15,17 +15,14 @@ const IndexPage = ({ data }) => {
       <section class="text-gray-400 bg-gray-900 body-font">
         <div class="container px-5 py-24 mx-auto">
           <div class="text-center mb-20">
-            {data.allSanityMovie.edges.map(movie => (
-              <div className="text-xl">{movie.node.title}</div>
-            ))}
             <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-white mb-4">
               The only buddy you need to get you through your next interview
             </h1>
-            <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
+            {/* <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
               Blue bottle crucifix vinyl post-ironic four dollar toast vegan
               taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh
               mi pug.
-            </p>
+            </p> */}
           </div>
           <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
             <div class="p-2 sm:w-1/2 w-full">
@@ -106,7 +103,7 @@ const IndexPage = ({ data }) => {
             </div>
           </div>
           <button class="flex mx-auto mt-16 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg">
-            <Link to="/practice">Try now</Link>
+            <Link to="/practice">Start Practising</Link>
           </button>
         </div>
       </section>
@@ -122,7 +119,7 @@ const IndexPage = ({ data }) => {
                 />
                 <p class="leading-relaxed">
                   Even my sigma grindset couldn't help get me through the grind
-                  of behaviour interview prep. When I found Interview Buddy I
+                  of behavioural interview prep. When I found Interview Buddy I
                   was able to practice daily until I was confident to land a
                   role as the next CEO of Meta.
                 </p>
@@ -179,18 +176,5 @@ const IndexPage = ({ data }) => {
     </Layout>
   )
 }
-
-export const query = graphql`
-  {
-    allSanityMovie {
-      edges {
-        node {
-          releaseDate
-          title
-        }
-      }
-    }
-  }
-`
 
 export default IndexPage

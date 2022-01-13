@@ -4,9 +4,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Interview Buddy`,
-    description: `Kick off your next behaviour interview with these practice questions`,
-    author: `@jcheso`,
+    title: `Interview Buddr`,
+    description: `Kick off your next behavioural interview with these practice questions`,
+    author: `@Buddy`,
     siteUrl: `https://interview-buddy.netlify.app/`,
   },
 

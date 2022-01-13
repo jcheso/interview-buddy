@@ -7,22 +7,27 @@ export default {
   icon: EditIcon,
   fields: [
     {
-      name: "questionTitle",
-      title: "Question Title",
+      name: "question",
+      title: "Question",
       type: "string",
     },
     {
       name: "industry",
       title: "Industry",
-      type: 'reference',
-      to: [{type: 'industry'}],
+      type: "reference",
+      to: [{ type: "industry" }],
     },
     {
       name: "role",
       title: "Role",
-      type: 'reference',
-      to: [{type: 'role'}],
+      type: "reference",
+      to: [{ type: "role" }],
+    },
+    {
+      name: "company",
+      title: "Company",
+      type: "reference",
+      to: [{ type: "company" }],
     },
   ],
-
 };
