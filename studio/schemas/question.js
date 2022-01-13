@@ -14,12 +14,14 @@ export default {
     {
       name: "industry",
       title: "Industry",
-      type: "string",
+      type: 'reference',
+      to: [{type: 'industry'}],
     },
     {
       name: "role",
       title: "Role",
-      type: "string",
+      type: 'reference',
+      to: [{type: 'role'}],
     },
   ],
 
