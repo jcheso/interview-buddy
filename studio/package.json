@@ -8,7 +8,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
-    "build": "sanity build"
+    "build": "sanity build",
+    "graphql-deploy": "sanity graphql deploy --playground"
   },
   "keywords": [
     "sanity"
@@ -25,9 +26,9 @@
     "react": "^17.0",
     "react-dom": "^17.0",
     "react-icons": "^3.11.0",
+    "sanity": "^2.20.0",
     "styled-components": "^5.2.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git@github.com:jcheso/interview-buddy.git"
