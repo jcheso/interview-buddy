@@ -5,7 +5,13 @@ import VideoRecorder from "react-video-recorder"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
-const SecondPage = () => (
+import WebcamComponent from "../components/webcam";
+
+const SecondPage = () => {
+
+  const [cameraShown, setCameraShown] = React.useState(false)
+
+  return (
   <Layout>
     <Seo title="Practice" />
     <section class="text-gray-400 bg-gray-900 body-font">
@@ -83,15 +89,19 @@ const SecondPage = () => (
           </p>
         </div>
       </div>
-      <VideoRecorder
-        class="h-max"
-        onRecordingComplete={videoBlob => {
-          // Do something with the video...
-          console.log("videoBlob", videoBlob)
-        }}
-      />
+
+      <button className="flex mx-auto mt-16 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg" 
+        onClick={() => setCameraShown((v)=>!v)}>Show Camera</button>
+      {
+        cameraShown ?
+        <WebcamComponent/>
+        :
+        null
+      }
+
     </section>
   </Layout>
-)
+  )
+}
 
 export default SecondPage
