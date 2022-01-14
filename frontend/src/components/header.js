@@ -19,17 +19,21 @@ const Header = ({ siteTitle }) => (
           <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
         </svg>
         <Link to="/">
-          <span class="ml-3 text-xl">Interview Buddy</span>
+          <span class="ml-3 text-xl">{siteTitle}</span>
         </Link>
       </a>
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-        {/* <a class="mr-5 hover:text-white">First Link</a>
-        <a class="mr-5 hover:text-white">Second Link</a>
-        <a class="mr-5 hover:text-white">Third Link</a>
+        <Link to="/practice">
+          <a class="mr-5 hover:text-white">Practice Page 1</a>
+        </Link>
+        <Link to="/practice-two">
+          <a class="mr-5 hover:text-white">Practice Page 2</a>
+        </Link>
+        {/*<a class="mr-5 hover:text-white">Third Link</a>
         <a class="mr-5 hover:text-white">Fourth Link</a> */}
       </nav>
       <button class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0">
-        Submit Your Own
+        Submit a question
         <svg
           fill="none"
           stroke="currentColor"

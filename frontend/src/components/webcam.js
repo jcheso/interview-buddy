@@ -55,9 +55,9 @@ const WebcamComponent = () => {
   }, [recordedChunks])
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", padding: "5rem" }}>
-      <Webcam audio={true} ref={webcamRef} />
-      <div style={{ display: "flex", justifyContent: "center" }}>
+    <div>
+      <Webcam audio={false} ref={webcamRef} />
+      <div>
         {capturing ? (
           <button onClick={handleStopCaptureClick}>Stop Capture</button>
         ) : (
