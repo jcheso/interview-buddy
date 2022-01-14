@@ -165,7 +165,7 @@ const IndexPage = ({ data }) => {
                 </p>
                 <span class="inline-block h-1 w-10 rounded bg-yellow-500 mt-6 mb-4"></span>
                 <h2 class="text-white font-medium title-font tracking-wider text-sm">
-                  Jack Leyland
+                  JACK LEYLAND
                 </h2>
                 <p class="text-gray-500">CTO</p>
               </div>
