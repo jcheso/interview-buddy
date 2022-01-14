@@ -1,14 +1,15 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import WebcamComponent from "../components/webcam"
 
-const SecondPage = () => {
+const SecondPage = ({ data }) => {
   const [cameraShown, setCameraShown] = React.useState(false)
-
+  const [questionNumber, setQuestionNumber] = React.useState(0)
   return (
     <Layout>
       <Seo title="Practice" />
@@ -77,17 +78,23 @@ const SecondPage = () => {
 
           <div class="flex flex-col text-center w-full">
             <h1 class="text-xl font-medium title-font mb-4 text-white">
-              Master Cleanse Reliac Heirloom
+              {data.allSanityQuestion.edges[questionNumber].node.question}
             </h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify, subway tile poke farm-to-table. Franzen you probably
-              haven't heard of them man bun deep jianbing selfies heirloom prism
-              food truck ugh squid celiac humblebrag.
+              Remember to use the STAR Method!
             </p>
           </div>
         </div>
-
+        <button
+          className="flex mx-auto mt-16 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
+          onClick={() =>
+            setQuestionNumber(
+              Math.floor(Math.random() * data.allSanityQuestion.edges.length)
+            )
+          }
+        >
+          Generate Question
+        </button>
         <button
           className="flex mx-auto mt-16 text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
           onClick={() => setCameraShown(v => !v)}
@@ -99,5 +106,17 @@ const SecondPage = () => {
     </Layout>
   )
 }
+
+export const query = graphql`
+  {
+    allSanityQuestion {
+      edges {
+        node {
+          question
+        }
+      }
+    }
+  }
+`
 
 export default SecondPage
