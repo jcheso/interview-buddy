@@ -6,7 +6,6 @@ function sleep(ms) {
 }
 
 const CountdownComponent = (props) => {
-  console.log(props)
   return (
     <CountdownCircleTimer
       isPlaying
