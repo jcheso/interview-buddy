@@ -1,13 +1,25 @@
 import * as React from "react"
-
+import { navigate } from "gatsby"
+import ReCAPTCHA from "react-google-recaptcha"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { graphql, GraphQLErrorList } from "gatsby"
+import { useFormspark } from "@formspark/use-formspark"
+import { useForm } from "react-hook-form"
 
 const SubmitQuestion = props => {
   const { data, errors } = props
   const role = (data || {}).role
   const industry = (data || {}).industry
+  const recaptchaRef = React.useRef()
+  const [submit, submitting] = useFormspark({
+    formId: "1YYiT1yZ",
+  })
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: formErrors },
+  } = useForm()
 
   if (errors) {
     return (
@@ -22,8 +34,18 @@ const SubmitQuestion = props => {
       'Missing data". Open the studio at http://localhost:3333 and add some content and restart the development server.'
     )
   }
-  console.log(role)
-  console.log(industry)
+
+  const onSubmit = async data => {
+    const dataWithToken = {
+      "g-recaptcha-response": recaptchaRef.current.getValue(),
+      ...data,
+    }
+
+    await submit(dataWithToken)
+      .then(() => navigate("/forms/success", { state: data }))
+      .catch(() => navigate("/forms/error"))
+  }
+
   return (
     <Layout>
       <Seo title="Submit Question" />
@@ -38,7 +60,7 @@ const SubmitQuestion = props => {
               Help out the community by submitting your own questions.
             </p>
           </div>
-          <form action="https://submit-form.com/1YYiT1yZ">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="lg:w-1/2 md:w-2/3 mx-auto">
               <div className="flex flex-wrap -m-2">
                 <div className="p-2 w-1/3">
@@ -54,8 +76,9 @@ const SubmitQuestion = props => {
                       id="industry"
                       name="industry"
                       className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      {...register("industry")}
                     >
-                      {role.edges.map((x, y) => (
+                      {industry.edges.map((x, y) => (
                         <option key={y}>{x.node.title}</option>
                       ))}
                     </select>
@@ -74,6 +97,7 @@ const SubmitQuestion = props => {
                       id="role"
                       name="role"
                       className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      {...register("role")}
                     >
                       {role.edges.map((x, y) => (
                         <option key={y}>{x.node.title}</option>
@@ -94,6 +118,7 @@ const SubmitQuestion = props => {
                       id="company"
                       name="company"
                       className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      {...register("company")}
                     />
                   </div>
                 </div>
@@ -109,16 +134,24 @@ const SubmitQuestion = props => {
                       id="question"
                       name="question"
                       className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 h-32 text-base outline-none text-gray-100 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                      {...register("question")}
                     ></textarea>
                   </div>
                 </div>
-                <div className="p-2 w-full">
-                  <button
-                    type="submit"
-                    className="flex mx-auto text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
-                  >
-                    Submit
-                  </button>
+                <div className="p-2 w-full flex justify-center">
+                  <ReCAPTCHA
+                    sitekey={process.env.GATSBY_GOOGLE_RECAPTCHA_SITE_KEY}
+                    ref={recaptchaRef}
+                  />
+                  <div className="p-2 w-full">
+                    <button
+                      type="submit"
+                      disabled={submitting}
+                      className="flex mx-auto text-white bg-yellow-500 border-0 py-2 px-8 focus:outline-none hover:bg-yellow-600 rounded text-lg"
+                    >
+                      Submit
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React from "react"
 import Webcam from "react-webcam"
 
-const WebcamComponent = () => {
+const WebcamComponent = props => {
   const videoConstraints = {
     facingMode: "user",
   }
@@ -54,6 +54,15 @@ const WebcamComponent = () => {
     }
   }, [recordedChunks])
 
+  React.useEffect(() => {
+    if (props.count === 2) {
+      handleStartCaptureClick()
+    }
+    if (props.count === 3) {
+      // handleStopCaptureClick()
+      // handleDownload()
+    }
+  })
   return (
     <div>
       <Webcam audio={false} ref={webcamRef} />

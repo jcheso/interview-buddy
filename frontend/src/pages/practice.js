@@ -18,8 +18,9 @@ const SecondPage = props => {
   const questions = (data || {}).questions
   const [questionNumber, setQuestionNumber] = React.useState(0)
   const [cameraShown, setCameraShown] = React.useState(false)
-  const [isRecording, setIsRecording] = React.useState(false)
-
+  const [recording, setRecording] = React.useState(false)
+  const [count, setCount] = React.useState(0)
+  console.log(recording)
   if (errors) {
     return (
       <Layout>
@@ -66,12 +67,12 @@ const SecondPage = props => {
                     </label>
                     <div className="mt-1">
                       <textarea
-                        readOnly={isRecording}
+                        readOnly={recording}
                         rows={2}
                         name="situation"
                         id="situation"
                         className={`w-full  bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" ${
-                          isRecording
+                          recording
                             ? "bg-red-200 cursor-not-allowed"
                             : "bg-gray-800"
                         }`}
@@ -100,12 +101,12 @@ const SecondPage = props => {
                       </label>
                       <div className="mt-1">
                         <textarea
-                          readOnly={isRecording}
+                          readOnly={recording}
                           rows={2}
                           name="situation"
                           id="situation"
                           className={`w-full  bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" ${
-                            isRecording
+                            recording
                               ? "bg-red-200 cursor-not-allowed"
                               : "bg-gray-800"
                           }`}
@@ -134,12 +135,12 @@ const SecondPage = props => {
                     </label>
                     <div className="mt-1">
                       <textarea
-                        readOnly={isRecording}
+                        readOnly={recording}
                         rows={2}
                         name="situation"
                         id="situation"
                         className={`w-full  bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" ${
-                          isRecording
+                          recording
                             ? "bg-red-200 cursor-not-allowed"
                             : "bg-gray-800"
                         }`}
@@ -167,12 +168,12 @@ const SecondPage = props => {
                     </label>
                     <div className="mt-1">
                       <textarea
-                        readOnly={isRecording}
+                        readOnly={recording}
                         rows={2}
                         name="situation"
                         id="situation"
                         className={`w-full  bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" ${
-                          isRecording
+                          recording
                             ? "bg-red-200 cursor-not-allowed"
                             : "bg-gray-800"
                         }`}
@@ -199,53 +200,60 @@ const SecondPage = props => {
             <div className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full">
               <div className="w-full h-3/5 flex flex-center align-middle justify-center">
                 {cameraShown ? (
-                  <WebcamComponent />
+                  <WebcamComponent count={count} />
                 ) : (
                   <img src="https://dummyimage.com/600x500" alt="step" />
                 )}
               </div>
-
-                {/* On click, make this button turn into a red timer - on time expiry, change button to another 2 min green timer and auto start recording if camera enabled */}
-
-                {
-                count != 1 && count != 2 ?
-                <div stlyle={{justifyContent:"center"}} className="w-1/3 flex justify-center">
+              <div class="p-4 md:w-1/2 w-full justify-center content-center">
+                <div class="h-full bg-gray-800 bg-opacity-40 p-8 rounded ">
+                  {/* On click, make this button turn into a red timer - on time expiry, change button to another 2 min green timer and auto start recording if camera enabled */}
+                  <div className="py-10 flex justify-right align-middle content-center">
+                    {count === 1 ? <p>Prepare your answers</p> : null}
+                    {count === 2 ? <p>Practice your response</p> : null}
+                    {count != 1 && count != 2 ? (
+                      <div className="w-1/3 flex justify-center align-middle content-center">
+                        <button
+                          className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
+                          onClick={() => {
+                            setQuestionNumber(
+                              Math.floor(Math.random() * questions.edges.length)
+                            )
+                            setCount(count + 1)
+                          }}
+                        >
+                          Start Practice
+                        </button>
+                      </div>
+                    ) : null}
+                    {count == 1 ? (
+                      <div className="w-1/3 flex justify-center">
+                        <CountdownComponent
+                          duration={5}
+                          setCount={setCount}
+                          setRecording={setRecording}
+                          count={count}
+                        />
+                      </div>
+                    ) : null}
+                    {count == 2 ? (
+                      <div className="w-1/3 flex justify-center">
+                        <CountdownComponent
+                          duration={10}
+                          setCount={setCount}
+                          setRecording={setRecording}
+                          count={count}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
                   <button
-                    className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
-                    onClick={() => {
-                      setQuestionNumber(
-                        Math.floor(
-                          Math.random() * data.allSanityQuestion.edges.length
-                        )
-                      )
-                      setCount(count+1)
-                    }}
+                    className="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg"
+                    onClick={() => setCameraShown(v => !v)}
                   >
-                    Start Practice
+                    Enable Camera
                   </button>
                 </div>
-                :
-                null
-                }
-                {
-                  count == 1
-                  ?
-                  <div className="w-1/3 flex justify-center">
-                    <CountdownComponent duration={5} setCount={setCount} count={count}/>
-                  </div>
-                  :
-                  null
-                }
-                {
-                  count == 2
-                  ?
-                  <div className="w-1/3 flex justify-center">
-                    <CountdownComponent duration={10} setCount={setCount} count={count}/>
-                  </div>
-                  :
-                  null
-                }
-
               </div>
             </div>
           </div>
