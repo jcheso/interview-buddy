@@ -11,6 +11,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 import WebcamComponent from "../components/webcam"
+import CountdownComponent from "../components/timer"
 
 const SecondPage = props => {
   const { data, errors } = props
@@ -204,24 +205,47 @@ const SecondPage = props => {
                 )}
               </div>
 
-              <div className="flex justify-center pt-12">
-                <button
-                  className="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg"
-                  onClick={() => setCameraShown(v => !v)}
-                >
-                  Enable Camera
-                </button>
                 {/* On click, make this button turn into a red timer - on time expiry, change button to another 2 min green timer and auto start recording if camera enabled */}
-                <button
-                  className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
-                  onClick={() =>
-                    setQuestionNumber(
-                      Math.floor(Math.random() * questions.edges.length)
-                    )
-                  }
-                >
-                  Start Practice
-                </button>
+
+                {
+                count != 1 && count != 2 ?
+                <div stlyle={{justifyContent:"center"}} className="w-1/3 flex justify-center">
+                  <button
+                    className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
+                    onClick={() => {
+                      setQuestionNumber(
+                        Math.floor(
+                          Math.random() * data.allSanityQuestion.edges.length
+                        )
+                      )
+                      setCount(count+1)
+                    }}
+                  >
+                    Start Practice
+                  </button>
+                </div>
+                :
+                null
+                }
+                {
+                  count == 1
+                  ?
+                  <div className="w-1/3 flex justify-center">
+                    <CountdownComponent duration={5} setCount={setCount} count={count}/>
+                  </div>
+                  :
+                  null
+                }
+                {
+                  count == 2
+                  ?
+                  <div className="w-1/3 flex justify-center">
+                    <CountdownComponent duration={10} setCount={setCount} count={count}/>
+                  </div>
+                  :
+                  null
+                }
+
               </div>
             </div>
           </div>
