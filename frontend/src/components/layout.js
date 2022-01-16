@@ -1,6 +1,6 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import Footer from "./footer"
 
@@ -21,7 +21,7 @@ const Layout = ({ children, removeGrow }) => {
       {removeGrow ? (
         children
       ) : (
-        <main className="relative flex-grow md:pt-24 pt-12">{children}</main>
+        <main className="relative flex-grow">{children}</main>
       )}
       <Footer siteTitle={data.site.siteMetadata?.title || `Title`}></Footer>
     </div>
