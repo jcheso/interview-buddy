@@ -17,10 +17,10 @@ const SecondPage = props => {
   const { data, errors } = props
   const questions = (data || {}).questions
   const [questionNumber, setQuestionNumber] = React.useState(0)
-  const [cameraShown, setCameraShown] = React.useState(false)
+  const [cameraShown, setCameraShown] = React.useState(true)
   const [recording, setRecording] = React.useState(false)
   const [count, setCount] = React.useState(0)
-  console.log(recording)
+
   if (errors) {
     return (
       <Layout>
@@ -199,11 +199,9 @@ const SecondPage = props => {
             </div>
             <div className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full">
               <div className="w-full h-3/5 flex flex-center align-middle justify-center">
-                {cameraShown ? (
+
                   <WebcamComponent count={count} />
-                ) : (
-                  <img src="https://dummyimage.com/600x500" alt="step" />
-                )}
+                
               </div>
               <div class="p-4 md:w-1/2 w-full justify-center content-center">
                 <div class="h-full bg-gray-800 bg-opacity-40 p-8 rounded ">

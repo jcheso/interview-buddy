@@ -1,10 +1,6 @@
 import * as React from "react"
 import { CountdownCircleTimer } from "react-countdown-circle-timer"
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
 const CountdownComponent = props => {
   return (
     <CountdownCircleTimer

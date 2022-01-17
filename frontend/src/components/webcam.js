@@ -1,11 +1,11 @@
 import React from "react"
 import Webcam from "react-webcam"
 
-const WebcamComponent = props => {
+const WebcamComponent = React.memo(props => {
   const videoConstraints = {
     facingMode: "user",
   }
-
+  
   const webcamRef = React.useRef(null)
   const mediaRecorderRef = React.useRef(null)
   const [capturing, setCapturing] = React.useState(false)
@@ -33,8 +33,10 @@ const WebcamComponent = props => {
   )
 
   const handleStopCaptureClick = React.useCallback(() => {
-    mediaRecorderRef.current.stop()
-    setCapturing(false)
+    if(mediaRecorderRef.current.state == "recording") {
+      mediaRecorderRef.current.stop()
+      setCapturing(false)
+    }
   }, [mediaRecorderRef, webcamRef, setCapturing])
 
   const handleDownload = React.useCallback(() => {
@@ -51,33 +53,26 @@ const WebcamComponent = props => {
       a.click()
       window.URL.revokeObjectURL(url)
       setRecordedChunks([])
+      console.log("end of download func")
     }
   }, [recordedChunks])
 
   React.useEffect(() => {
     if (props.count === 2) {
+      console.log("recording")
       handleStartCaptureClick()
     }
     if (props.count === 3) {
-      // handleStopCaptureClick()
-      // handleDownload()
+      handleStopCaptureClick()
+      handleDownload()
     }
   })
+
   return (
     <div>
       <Webcam audio={false} ref={webcamRef} />
-      <div>
-        {capturing ? (
-          <button onClick={handleStopCaptureClick}>Stop Capture</button>
-        ) : (
-          <button onClick={handleStartCaptureClick}>Start Capture</button>
-        )}
-        {recordedChunks.length > 0 && (
-          <button onClick={handleDownload}>Download</button>
-        )}
-      </div>
     </div>
   )
-}
+})
 
 export default WebcamComponent
