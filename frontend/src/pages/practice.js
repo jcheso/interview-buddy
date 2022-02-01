@@ -6,7 +6,7 @@ import {
   FaChalkboardTeacher,
   FaDownload,
 } from "react-icons/fa"
-import { BsGraphUp } from "react-icons/Bs"
+import { BsGraphUp } from "react-icons/bs"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
@@ -199,9 +199,7 @@ const SecondPage = props => {
             </div>
             <div className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full">
               <div className="w-full h-3/5 flex flex-center align-middle justify-center">
-
-                  <WebcamComponent count={count} />
-                
+                <WebcamComponent count={count} />
               </div>
               <div class="p-4 md:w-1/2 w-full justify-center content-center">
                 <div class="h-full bg-gray-800 bg-opacity-40 p-8 rounded ">
