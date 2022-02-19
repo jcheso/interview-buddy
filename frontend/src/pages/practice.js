@@ -6,7 +6,7 @@ import {
   FaChalkboardTeacher,
   FaDownload,
 } from "react-icons/fa"
-import { BsGraphUp } from "react-icons/Bs"
+import { BsGraphUp } from "react-icons/bs"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
