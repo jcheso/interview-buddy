@@ -3,9 +3,11 @@ import Webcam from "react-webcam"
 
 const WebcamComponent = React.memo(props => {
   const videoConstraints = {
+    width: 1280,
+    height: 720,
     facingMode: "user",
   }
-  
+
   const webcamRef = React.useRef(null)
   const mediaRecorderRef = React.useRef(null)
   const [capturing, setCapturing] = React.useState(false)
@@ -33,7 +35,7 @@ const WebcamComponent = React.memo(props => {
   )
 
   const handleStopCaptureClick = React.useCallback(() => {
-    if(mediaRecorderRef.current.state == "recording") {
+    if (mediaRecorderRef.current.state == "recording") {
       mediaRecorderRef.current.stop()
       setCapturing(false)
     }
@@ -70,7 +72,11 @@ const WebcamComponent = React.memo(props => {
 
   return (
     <div>
-      <Webcam audio={false} ref={webcamRef} />
+      <Webcam
+        audio={false}
+        ref={webcamRef}
+        videoConstraints={videoConstraints}
+      />
     </div>
   )
 })
