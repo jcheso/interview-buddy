@@ -6,7 +6,7 @@ import Seo from "../components/seo"
 const IndexPage = ({ data }) => {
   return (
     <Layout>
-      <Seo title="Home" />
+      <Seo title="Interview Buddy" />
       <section className="text-gray-400 bg-gray-900 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="text-center mb-20">
@@ -14,7 +14,8 @@ const IndexPage = ({ data }) => {
               The only buddy you need to get you through your next interview
             </h1>
             <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-              Find a question from our question bank. Then start the timer to prepare your response and record your answer!
+              Find a question from our question bank. Then start the timer to
+              prepare your response and record your answer!
             </p>
           </div>
           <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
@@ -100,7 +101,6 @@ const IndexPage = ({ data }) => {
           </button>
         </div>
       </section>
-
     </Layout>
   )
 }
