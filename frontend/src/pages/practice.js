@@ -9,7 +9,6 @@ import {
 import { BsGraphUp } from "react-icons/bs"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-
 import WebcamComponent from "../components/webcam"
 import CountdownComponent from "../components/timer"
 
@@ -17,7 +16,6 @@ const SecondPage = props => {
   const { data, errors } = props
   const questions = (data || {}).questions
   const [questionNumber, setQuestionNumber] = React.useState(0)
-  const [cameraShown, setCameraShown] = React.useState(true)
   const [recording, setRecording] = React.useState(false)
   const [count, setCount] = React.useState(0)
 
@@ -199,55 +197,64 @@ const SecondPage = props => {
             </div>
             <div className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full flex-col flex items-center">
               <div className="w-full h-full justify-start flex flex-col flex-center align-middle relative">
-                  <div className="sticky flex items-center top-16 flex-col">
-
-                    <WebcamComponent count={count} />
-                      <div className="absolute top-4 left-24">
-                        {count == 1 ? (
-                            <div className="w-1/3 flex justify-center">
-                              <CountdownComponent
-                                duration={60}
-                                setCount={setCount}
-                                setRecording={setRecording}
-                                count={count}
-                              />
-                            </div>
-                          ) : null}
-                          {count == 2 ? (
-                            <div className="w-1/3 flex justify-center">
-                              <CountdownComponent
-                                duration={120}
-                                setCount={setCount}
-                                setRecording={setRecording}
-                                count={count}
-                              />
-                            </div>
-                          ) : null}
+                <div className="sticky flex items-center top-16 flex-col">
+                  <WebcamComponent count={count} />
+                  <div className="absolute top-4 left-24">
+                    {count === 1 ? (
+                      <div className="w-1/3 flex justify-center">
+                        <CountdownComponent
+                          duration={60}
+                          setCount={setCount}
+                          setRecording={setRecording}
+                          count={count}
+                        />
                       </div>
+                    ) : null}
+                    {count === 2 ? (
+                      <div className="w-1/3 flex justify-center">
+                        <CountdownComponent
+                          duration={120}
+                          setCount={setCount}
+                          setRecording={setRecording}
+                          count={count}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
 
-                      <div class="p-2 w-2/3 justify-center content-center">
-                        <div class="h-full bg-opacity-40 p-2 rounded flex justify-center items-center gap-10">
-                          {/* On click, make this button turn into a red timer - on time expiry, change button to another 2 min green timer and auto start recording if camera enabled */}
-                          <div className="py-2 flex justify-right content-center">
-                            {count != 1 && count != 2 ? (
-                                <button
-                                  className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
-                                  onClick={() => {
-                                    setQuestionNumber(
-                                      Math.floor(Math.random() * questions.edges.length)
-                                    )
-                                    setCount(count + 1)
-                                  }}
-                                >
-                                  Start Practice
-                                </button>
-                            ) : null}
-                          </div>
-                          {count === 1 ? <p>Prepare your answers</p> : null}
-                          {count === 2 ? <p>Practice your response</p> : null}
-                        </div>
+                  <div class="p-2 w-2/3 justify-center content-center">
+                    <div class="h-full bg-opacity-40 p-2 rounded flex justify-center items-center gap-10">
+                      {/* On click, make this button turn into a red timer - on time expiry, change button to another 2 min green timer and auto start recording if camera enabled */}
+                      <div className="py-2 flex justify-right content-center">
+                        {count !== 1 && count !== 2 ? (
+                          <button
+                            className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
+                            onClick={() => {
+                              setQuestionNumber(
+                                Math.floor(
+                                  Math.random() * questions.edges.length
+                                )
+                              )
+                              setCount((count + 1) % 3)
+                            }}
+                          >
+                            Start
+                          </button>
+                        ) : null}
+                        <button
+                          className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
+                          onClick={() => {
+                            setQuestionNumber(
+                              Math.floor(Math.random() * questions.edges.length)
+                            )
+                          }}
+                        >
+                          Next
+                        </button>
                       </div>
                   </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
