@@ -3,9 +3,11 @@ import Webcam from "react-webcam"
 
 const WebcamComponent = React.memo(props => {
   const videoConstraints = {
+    width: 1280,
+    height: 720,
     facingMode: "user",
   }
-  
+
   const webcamRef = React.useRef(null)
   const mediaRecorderRef = React.useRef(null)
   const [capturing, setCapturing] = React.useState(false)
@@ -33,7 +35,7 @@ const WebcamComponent = React.memo(props => {
   )
 
   const handleStopCaptureClick = React.useCallback(() => {
-    if(mediaRecorderRef.current.state == "recording") {
+    if (mediaRecorderRef.current.state == "recording") {
       mediaRecorderRef.current.stop()
       setCapturing(false)
     }
@@ -49,17 +51,15 @@ const WebcamComponent = React.memo(props => {
       document.body.appendChild(a)
       a.style = "display: none"
       a.href = url
-      a.download = "react-webcam-stream-capture.webm"
+      a.download = "interview-buddy-answer"
       a.click()
       window.URL.revokeObjectURL(url)
       setRecordedChunks([])
-      console.log("end of download func")
     }
   }, [recordedChunks])
 
   React.useEffect(() => {
     if (props.count === 2) {
-      console.log("recording")
       handleStartCaptureClick()
     }
     if (props.count === 3) {
@@ -69,8 +69,8 @@ const WebcamComponent = React.memo(props => {
   })
 
   return (
-    <div>
-      <Webcam audio={false} ref={webcamRef} />
+    <div className="rounded-lg overflow-hidden">
+      <Webcam muted mirrored={true} audio={true} ref={webcamRef} videoConstraints={videoConstraints}/>
     </div>
   )
 })
