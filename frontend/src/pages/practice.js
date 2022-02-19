@@ -9,7 +9,6 @@ import {
 import { BsGraphUp } from "react-icons/bs"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-
 import WebcamComponent from "../components/webcam"
 import CountdownComponent from "../components/timer"
 
@@ -17,7 +16,6 @@ const SecondPage = props => {
   const { data, errors } = props
   const questions = (data || {}).questions
   const [questionNumber, setQuestionNumber] = React.useState(0)
-  const [cameraShown, setCameraShown] = React.useState(true)
   const [recording, setRecording] = React.useState(false)
   const [count, setCount] = React.useState(0)
 
@@ -207,7 +205,7 @@ const SecondPage = props => {
                   <div className="py-10 flex justify-right align-middle content-center">
                     {count === 1 ? <p>Prepare your answers</p> : null}
                     {count === 2 ? <p>Practice your response</p> : null}
-                    {count != 1 && count != 2 ? (
+                    {count !== 1 && count !== 2 ? (
                       <div className="w-1/3 flex justify-center align-middle content-center">
                         <button
                           className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
@@ -222,7 +220,7 @@ const SecondPage = props => {
                         </button>
                       </div>
                     ) : null}
-                    {count == 1 ? (
+                    {count === 1 ? (
                       <div className="w-1/3 flex justify-center">
                         <CountdownComponent
                           duration={5}
@@ -232,7 +230,7 @@ const SecondPage = props => {
                         />
                       </div>
                     ) : null}
-                    {count == 2 ? (
+                    {count === 2 ? (
                       <div className="w-1/3 flex justify-center">
                         <CountdownComponent
                           duration={10}
@@ -243,12 +241,6 @@ const SecondPage = props => {
                       </div>
                     ) : null}
                   </div>
-                  <button
-                    className="inline-flex text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded text-lg"
-                    onClick={() => setCameraShown(v => !v)}
-                  >
-                    Enable Camera
-                  </button>
                 </div>
               </div>
             </div>

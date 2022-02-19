@@ -9,17 +9,12 @@ import { useForm } from "react-hook-form"
 
 const SubmitQuestion = props => {
   const { data, errors } = props
-  const role = (data || {}).role
   const industry = (data || {}).industry
   const recaptchaRef = React.useRef()
   const [submit, submitting] = useFormspark({
     formId: "1YYiT1yZ",
   })
-  const {
-    register,
-    handleSubmit,
-    formState: { errors: formErrors },
-  } = useForm()
+  const { register, handleSubmit } = useForm()
 
   if (errors) {
     return (
@@ -49,7 +44,6 @@ const SubmitQuestion = props => {
   return (
     <Layout>
       <Seo title="Submit Question" />
-
       <section className="text-gray-400 bg-gray-900 body-font relative">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
@@ -63,10 +57,10 @@ const SubmitQuestion = props => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="lg:w-1/2 md:w-2/3 mx-auto">
               <div className="flex flex-wrap -m-2">
-                <div className="p-2 w-1/3">
+                <div className="p-2 w-1/2">
                   <div className="relative">
                     <label
-                      for="name"
+                      Htmlfor="industry"
                       className="leading-7 text-sm text-gray-400"
                     >
                       Industry
@@ -75,40 +69,19 @@ const SubmitQuestion = props => {
                       type="text"
                       id="industry"
                       name="industry"
-                      className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      className="w-full h-10 bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                       {...register("industry")}
                     >
                       {industry.edges.map((x, y) => (
-                        <option key={y}>{x.node.title}</option>
+                        <option key={y}>{x.node.industry}</option>
                       ))}
                     </select>
                   </div>
                 </div>
-                <div className="p-2 w-1/3">
+                <div className="p-2 w-1/2">
                   <div className="relative">
                     <label
-                      for="email"
-                      className="leading-7 text-sm text-gray-400"
-                    >
-                      Role
-                    </label>
-                    <select
-                      type="text"
-                      id="role"
-                      name="role"
-                      className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                      {...register("role")}
-                    >
-                      {role.edges.map((x, y) => (
-                        <option key={y}>{x.node.title}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="p-2 w-1/3">
-                  <div className="relative">
-                    <label
-                      for="email"
+                      Htmlfor="company"
                       className="leading-7 text-sm text-gray-400"
                     >
                       Company
@@ -117,7 +90,7 @@ const SubmitQuestion = props => {
                       type="text"
                       id="company"
                       name="company"
-                      className="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                      className="w-full h-10 bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-yellow-500 focus:bg-gray-900 focus:ring-2 focus:ring-yellow-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                       {...register("company")}
                     />
                   </div>
@@ -125,7 +98,7 @@ const SubmitQuestion = props => {
                 <div className="p-2 w-full">
                   <div className="relative">
                     <label
-                      for="message"
+                      Htmlfor="question"
                       className="leading-7 text-sm text-gray-400"
                     >
                       Question
@@ -138,12 +111,13 @@ const SubmitQuestion = props => {
                     ></textarea>
                   </div>
                 </div>
-                <div className="p-2 w-full flex justify-center">
+                <div className="p-2 w-full flex justify-center flex-col content-center">
                   <ReCAPTCHA
+                    className="flex justify-center"
                     sitekey={process.env.GATSBY_GOOGLE_RECAPTCHA_SITE_KEY}
                     ref={recaptchaRef}
                   />
-                  <div className="p-2 w-full">
+                  <div className="p-4 w-full">
                     <button
                       type="submit"
                       disabled={submitting}
@@ -164,13 +138,6 @@ const SubmitQuestion = props => {
 
 export const query = graphql`
   {
-    role: allSanityRole {
-      edges {
-        node {
-          title
-        }
-      }
-    }
     industry: allSanityIndustry {
       edges {
         node {
