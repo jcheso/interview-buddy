@@ -14,7 +14,7 @@ const IndexPage = ({ data }) => {
               The only buddy you need to get you through your next interview
             </h1>
             <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-              Practice interview questions to get your dream job. Download your answers and analyse your responses!
+              Find a question from our question bank. Then start the timer to prepare your response and record your answer!
             </p>
           </div>
           <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">

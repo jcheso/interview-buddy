@@ -69,7 +69,7 @@ const WebcamComponent = React.memo(props => {
   })
 
   return (
-    <div>
+    <div className="rounded-lg overflow-hidden">
       <Webcam muted mirrored={true} audio={true} ref={webcamRef} videoConstraints={videoConstraints}/>
     </div>
   )

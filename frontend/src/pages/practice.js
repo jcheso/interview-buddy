@@ -199,7 +199,7 @@ const SecondPage = props => {
               <div className="w-full h-full justify-start flex flex-col flex-center align-middle relative">
                 <div className="sticky flex items-center top-16 flex-col">
                   <WebcamComponent count={count} />
-                  <div className="absolute top-4 left-24">
+                  <div className="absolute top-4 left-12">
                     {count === 1 ? (
                       <div className="w-1/3 flex justify-center">
                         <CountdownComponent
@@ -230,11 +230,6 @@ const SecondPage = props => {
                           <button
                             className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
                             onClick={() => {
-                              setQuestionNumber(
-                                Math.floor(
-                                  Math.random() * questions.edges.length
-                                )
-                              )
                               setCount((count + 1) % 3)
                             }}
                           >
@@ -242,7 +237,7 @@ const SecondPage = props => {
                           </button>
                         ) : null}
                         <button
-                          disabled={count !== 0}
+                          disabled={count%3 !== 0}
                           className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
                           onClick={() => {
                             setQuestionNumber(
