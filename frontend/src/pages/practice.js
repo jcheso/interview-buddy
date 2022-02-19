@@ -242,6 +242,7 @@ const SecondPage = props => {
                           </button>
                         ) : null}
                         <button
+                          disabled={count !== 0}
                           className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
                           onClick={() => {
                             setQuestionNumber(
@@ -252,7 +253,7 @@ const SecondPage = props => {
                           Next
                         </button>
                       </div>
-                  </div>
+                    </div>
                   </div>
                 </div>
               </div>
