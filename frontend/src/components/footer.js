@@ -7,15 +7,15 @@ import { OutboundLink } from "gatsby-plugin-google-analytics"
 const Footer = ({ siteTitle }) => (
   <footer className="text-gray-400 bg-gray-900 body-font">
     <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-      <a className="flex title-font font-medium items-center md:justify-start justify-center text-white">
+      <button className="flex title-font font-medium items-center md:justify-start justify-center text-white">
         <FaVideo class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" />
         <Link to="/">
           <span className="ml-3 text-xl">{siteTitle}</span>
         </Link>
-      </a>
+      </button>
       <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
         <OutboundLink aria-label="My Website" href="https://jarrydcheso.me/">
-          <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4">Jarryd Cheso</p>
+          <p className="text-sm text-gray-400 sm:ml-4 sm:pl-4">Jarryd Cheso</p>
         </OutboundLink>
         <OutboundLink
           aria-label="My GitHub"
@@ -35,7 +35,7 @@ const Footer = ({ siteTitle }) => (
           aria-label="My Website"
           href="https://william-thomson.studio"
         >
-          <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200">
+          <p className="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200">
             Will Thomson
           </p>
         </OutboundLink>
