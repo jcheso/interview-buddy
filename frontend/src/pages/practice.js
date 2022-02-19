@@ -247,8 +247,6 @@ const SecondPage = props => {
                           {count === 2 ? <p>Practice your response</p> : null}
                         </div>
                       </div>
-                  
-                      
                   </div>
               </div>
             </div>

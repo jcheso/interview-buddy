@@ -49,17 +49,15 @@ const WebcamComponent = React.memo(props => {
       document.body.appendChild(a)
       a.style = "display: none"
       a.href = url
-      a.download = "react-webcam-stream-capture.webm"
+      a.download = "interview-buddy-answer"
       a.click()
       window.URL.revokeObjectURL(url)
       setRecordedChunks([])
-      console.log("end of download func")
     }
   }, [recordedChunks])
 
   React.useEffect(() => {
     if (props.count === 2) {
-      console.log("recording")
       handleStartCaptureClick()
     }
     if (props.count === 3) {
@@ -70,7 +68,7 @@ const WebcamComponent = React.memo(props => {
 
   return (
     <div>
-      <Webcam audio={false} ref={webcamRef} />
+      <Webcam muted mirrored={true} audio={true} ref={webcamRef} />
     </div>
   )
 })

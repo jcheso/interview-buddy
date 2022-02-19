@@ -4,8 +4,6 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const IndexPage = ({ data }) => {
-  console.log(data)
-
   return (
     <Layout>
       <Seo title="Home" />
@@ -16,9 +14,7 @@ const IndexPage = ({ data }) => {
               The only buddy you need to get you through your next interview
             </h1>
             <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">
-              Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-              taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh
-              mi pug.
+              Practice interview questions to get your dream job. Download your answers and analyse your responses!
             </p>
           </div>
           <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
@@ -75,7 +71,7 @@ const IndexPage = ({ data }) => {
                   <path d="M22 4L12 14.01l-3-3"></path>
                 </svg>
                 <span className="title-font font-medium text-white">
-                  Filter by company to choose the ones relevant to you
+                  Submit questions to help other users
                 </span>
               </div>
             </div>
