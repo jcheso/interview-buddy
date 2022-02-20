@@ -18,11 +18,7 @@ const Layout = ({ children, removeGrow }) => {
   return (
     <div className="flex flex-col justify-between h-screen bg-gray-900">
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      {removeGrow ? (
-        children
-      ) : (
-        <main className="relative flex-grow">{children}</main>
-      )}
+      {removeGrow ? children : <main className="">{children}</main>}
       <Footer siteTitle={data.site.siteMetadata?.title || `Title`}></Footer>
     </div>
   )

@@ -35,7 +35,7 @@ const Footer = ({ siteTitle }) => (
           aria-label="My Website"
           href="https://william-thomson.studio"
         >
-          <p className="text-sm text-gray-400 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200">
+          <p className="text-sm text-gray-400 ml-4 pl-4 border-l-2 border-gray-200">
             Will Thomson
           </p>
         </OutboundLink>

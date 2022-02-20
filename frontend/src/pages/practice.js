@@ -195,9 +195,9 @@ const SecondPage = props => {
                 </div>
               </div>
             </div>
-            <div className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full flex-col flex items-center">
+            <div className="lg:w-3/5 md:w-1/2 md:object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full flex-col flex items-center">
               <div className="w-full h-full justify-start flex flex-col flex-center align-middle relative">
-                <div className="sticky flex items-center top-16 flex-col">
+                <div className="md:sticky flex items-center md:top-16 flex-col">
                   <WebcamComponent count={count} />
                   <div className="absolute top-4 left-12">
                     {count === 1 ? (
@@ -237,7 +237,7 @@ const SecondPage = props => {
                           </button>
                         ) : null}
                         <button
-                          disabled={count%3 !== 0}
+                          disabled={count % 3 !== 0}
                           className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
                           onClick={() => {
                             setQuestionNumber(
