@@ -8,7 +8,7 @@ const Footer = ({ siteTitle }) => (
   <footer className="text-gray-400 bg-gray-900 body-font">
     <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
       <button className="flex title-font font-medium items-center md:justify-start justify-center text-white">
-        <FaVideo class="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" />
+        <FaVideo className="w-10 h-10 text-white p-2 bg-yellow-500 rounded-full" />
         <Link to="/">
           <span className="ml-3 text-xl">{siteTitle}</span>
         </Link>
