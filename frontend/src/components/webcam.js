@@ -47,14 +47,16 @@ const WebcamComponent = React.memo(props => {
         type: "video/webm",
       })
       const url = URL.createObjectURL(blob)
-      const a = document.createElement("a")
-      document.body.appendChild(a)
-      a.style = "display: none"
-      a.href = url
-      a.download = "interview-buddy-answer"
-      a.click()
-      window.URL.revokeObjectURL(url)
+      console.log(recordedChunks)
+      console.log(blob)
+      console.log(typeof url)
+      props.setBlob(blob)
+      //set blob in state
+      props.setVideoUrl(url)
+
       setRecordedChunks([])
+
+      props.setCount(0)
     }
   }, [recordedChunks])
 

@@ -11,6 +11,10 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import WebcamComponent from "../components/webcam"
 import CountdownComponent from "../components/timer"
+import ReactPlayer from 'react-player'
+import Toggle from "../components/toggle"
+import webgazer from "webgazer"
+import CalibrationCanvas from "../components/calibrationCanvas"
 
 const SecondPage = props => {
   const { data, errors } = props
@@ -18,6 +22,25 @@ const SecondPage = props => {
   const [questionNumber, setQuestionNumber] = React.useState(0)
   const [recording, setRecording] = React.useState(false)
   const [count, setCount] = React.useState(0)
+  const [blob , setBlob] = React.useState(null)
+  const [videoUrl , setVideoUrl] = React.useState(null)
+
+  const [advancedMode, setAdvancedMode] =React.useState(false)
+  // const gazesMeasured = React.useState(0)
+  // const gazePositionX = React.useState(0)
+  // const gazePositionY = React.useState(0)
+
+  if(videoUrl) {
+    window.saveDataAcrossSessions = true
+    webgazer.showVideoPreview(false)
+    webgazer.setStaticVideo(videoUrl)
+    {
+        webgazer.setGazeListener((data, elapsedTime) => {
+            console.log(data)
+        }).begin()
+    }
+  }
+
 
   if (errors) {
     return (
@@ -33,15 +56,36 @@ const SecondPage = props => {
     )
   }
 
+  const stopCountDown = () => {
+    setCount(0)
+    setRecording(false)
+  }
+
+  const nextQuestion = () => {
+    setVideoUrl(null);
+    setQuestionNumber(
+      Math.floor(Math.random() * questions.edges.length)
+    )
+  }
+
   return (
     <Layout>
+      {
+        advancedMode ?
+        <CalibrationCanvas/>
+        :
+        (
+      <>
       <Seo title="Practice" />
       <section className="text-gray-400 bg-gray-900 body-font">
         <div className="container px-5 pt-12 pb-6 mx-auto flex flex-wrap">
-          <div className="text-center w-full">
+          <div className="text-center w-full flex flex-col">
             <h1 className="title-font sm:text-4xl text-3xl mb-6 font-medium text-yellow-400 py-4 h-full">
               {questions.edges[questionNumber].node.question}
             </h1>
+            <div>
+              <Toggle onChange={() => setAdvancedMode(!advancedMode)}/>
+            </div>
           </div>
 
           <div className="flex flex-wrap w-full align-middle">
@@ -198,12 +242,20 @@ const SecondPage = props => {
             <div className="lg:w-3/5 md:w-1/2 object-cover object-center rounded-lg md:mt-0 mt-12 md:pt-8 h-full flex-col flex items-center">
               <div className="w-full h-full justify-start flex flex-col flex-center align-middle relative">
                 <div className="sticky flex items-center top-16 flex-col">
-                  <WebcamComponent count={count} />
+                  
+                  {videoUrl ? 
+                    <div className="rounded-lg overflow-hidden">
+                      <ReactPlayer url={videoUrl} playing={true} controls={true}/>
+                    </div> 
+                  :  
+                    <WebcamComponent count={count} setBlob={setBlob} setVideoUrl={setVideoUrl} setCount={setCount}/>
+                  }
+                  
                   <div className="absolute top-4 left-12">
                     {count === 1 ? (
                       <div className="w-1/3 flex justify-center">
                         <CountdownComponent
-                          duration={60}
+                          duration={5}
                           setCount={setCount}
                           setRecording={setRecording}
                           count={count}
@@ -213,7 +265,7 @@ const SecondPage = props => {
                     {count === 2 ? (
                       <div className="w-1/3 flex justify-center">
                         <CountdownComponent
-                          duration={120}
+                          duration={5}
                           setCount={setCount}
                           setRecording={setRecording}
                           count={count}
@@ -230,6 +282,7 @@ const SecondPage = props => {
                           <button
                             className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
                             onClick={() => {
+                              setVideoUrl(null);
                               setCount((count + 1) % 3)
                             }}
                           >
@@ -237,15 +290,16 @@ const SecondPage = props => {
                           </button>
                         ) : null}
                         <button
-                          disabled={count%3 !== 0}
                           className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg"
                           onClick={() => {
-                            setQuestionNumber(
-                              Math.floor(Math.random() * questions.edges.length)
-                            )
+                            count%3 !== 0 
+                            ?
+                            stopCountDown()
+                            :
+                            nextQuestion()
                           }}
                         >
-                          Next
+                          {count%3 !== 0  ? "Stop" : "Next"}
                         </button>
                       </div>
                     </div>
@@ -256,6 +310,9 @@ const SecondPage = props => {
           </div>
         </div>
       </section>
+      </>
+      )
+    }
     </Layout>
   )
 }
